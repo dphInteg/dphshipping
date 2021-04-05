@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="dphshipping" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>DPH Shipping Module</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Method Name</label>
+                </field>
+                <field id="shipping_cost" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Shipping Cost</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="service_type" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Service Type</label>
+                    <frontend_class>shipping-service-type</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\ServiceType</source_model>
+                </field>
+                <field id="ondemand_pickup_schedule" translate="label" type="select" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Requested Pickup Schedule</label>
+                    <frontend_class>shipping-pickup-schedule</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\OnDemandPickupSchedule</source_model>
+                    <depends>
+                        <field id="service_type">On-Demand</field>
+                    </depends>
+                </field>
+                <field id="pickup_schedule" translate="label" type="select" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Requested Pickup Schedule</label>
+                    <frontend_class>shipping-pickup-schedule</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\PickupSchedule</source_model>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                    </depends>
+                </field>
+                <field id="pickup_minutes" translate="label" type="text" sortOrder="47" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Pick-up in Minutes</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-60</validate>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="pickup_schedule" >Complete within</field>
+                    </depends>
+                </field>
+                <field id="pickup_days" translate="label" type="text" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Pick-up in Days</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-30</validate>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="pickup_schedule" separator=",">Complete within the next</field>
+                    </depends>
+                </field>
+                <field id="pickup_time" translate="label" type="time" sortOrder="49" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Pickup Time</label>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="pickup_schedule" separator=",">Complete today before,Complete tomorrow before,Complete within the next</field>
+                    </depends>
+                </field>
+                <field id="ondemand_delivery_schedule" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Requested Delivery Schedule</label>
+                    <frontend_class>shipping-delivery-schedule</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\OnDemandDeliverySchedule</source_model>
+                    <depends>
+                        <field id="service_type">On-Demand</field>
+                    </depends>
+                </field>
+                <field id="delivery_schedule" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Requested Delivery Schedule</label>
+                    <frontend_class>shipping-delivery-schedule</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\DeliverySchedule</source_model>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                    </depends>
+                </field>
+                <field id="delivery_minutes" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Delivery in Minutes</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-60</validate>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="delivery_schedule" >Complete within</field>
+                    </depends>
+                </field>
+                <field id="delivery_days" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Delivery in Days</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-30</validate>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="delivery_schedule" separator=",">Complete within the next</field>
+                    </depends>
+                </field>
+                <field id="delivery_time" translate="label" type="time" sortOrder="57" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Delivery Time</label>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                        <field id="delivery_schedule" separator=",">Complete today before,Complete tomorrow before,Complete within the next</field>
+                    </depends>
+                </field>
+                <field id="partner" translate="label" type="select" sortOrder="58" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Preferred Partner</label>
+                    <frontend_class>shipping-preferred-partner</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\PartnerType</source_model>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                    </depends>
+                </field>
+                <field id="ondemand_partner" translate="label" type="select" sortOrder="58" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Preferred Partner</label>
+                    <frontend_class>shipping-preferred-partner</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\OnDemandPartnerType</source_model>
+                    <depends>
+                        <field id="service_type">On-Demand</field>
+                    </depends>
+                </field>
+                <field id="packaging_size" translate="label" type="select" sortOrder="59" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Package Size</label>
+                    <frontend_class>shipping-packaging-size</frontend_class>
+                    <source_model>DphInteg\DPHShipping\Model\Data\PackagingSizeType</source_model>
+                    <depends>
+                        <field id="service_type">Scheduled</field>
+                    </depends>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

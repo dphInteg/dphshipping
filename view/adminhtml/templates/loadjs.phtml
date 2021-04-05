@@ -1,0 +1,15 @@
+<?php
+    $viewModel = $block->getViewModel();
+    $productInfoUrl = $viewModel->getProductInfoUrl();
+    $authKey = $viewModel->getAuthorizationKey();
+?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "dphshipping": {
+            "productInfoUrl": "<?= __($productInfoUrl)?>",
+            "authKey" : "<?= __($authKey)?>"
+        }
+    }
+}
+</script>

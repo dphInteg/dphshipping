@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="footer">
+            <container name="dph_shipping_js" htmlTag="div" htmlClass="dph_shipping_js">
+                <block name="dphshippingjs.viewmodel" template="DphInteg_DPHShipping::loadjs.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">DphInteg\DPHShipping\Model\Data\LoadajaxUrl</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

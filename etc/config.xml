@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <dphshipping>
+                <active>1</active>
+                <title>DPH Shipping Title</title>
+                <name>DPH Shipping Method Name</name>
+                <shipping_cost>10</shipping_cost>
+                <service_type>On-Demand</service_type>
+                <pickup_days>0</pickup_days>
+                <pickup_minutes>30</pickup_minutes>
+                <pickup_time>00,00,00</pickup_time>
+                <delivery_days>0</delivery_days>
+                <delivery_minutes>30</delivery_minutes>
+                <delivery_time>00,00,00</delivery_time>
+                <packaging_size>S</packaging_size>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <model>DphInteg\DPHShipping\Model\Carrier\DPHShipping</model>
+            </dphshipping>
+        </carriers>
+    </default>
+</config>
